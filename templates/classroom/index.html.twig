@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Classroom
+{% endblock %}
+
+{% block body %}
+	<h1>Liste des classrooms</h1>
+
+	<table class="table" border='2'>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nom</th>
+				<th>Editer</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for classroom in classrooms %}
+				<tr>
+					<td>{{ classroom.id }}</td>
+					<td>{{ classroom.Name }}</td>
+					<td>
+						{# <a href="{{ path('app_classroom_show', {'id': classroom.id}) }}">show</a> #}
+						<a href="{{ path('app_classroom_edit', {'id': classroom.id}) }}">modifier</a>
+						<a href="{{ path('app_classroom_delete',{'id': classroom.id}) }}">supprimer</a>
+
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="3">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_classroom_new') }}">Ajouter Classroom</a>
+{% endblock %}

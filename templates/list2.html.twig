@@ -1,0 +1,124 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List
+{% endblock %}
+
+{% block body %}
+	2-
+	<table class="table" border="3" align="center">
+		<thead>
+			<tr>
+				<th>ref</th>
+				<th>Titre</th>
+				<th>Description</th>
+				<th>date_debut</th>
+				<th>date_fin</th>
+				<th>nb_participants</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				{% for list in lists %}
+					<tr>
+						{% for l in list %}
+							<td>
+								{{ l }}
+							</td>
+						{% endfor %}
+					</tr>
+				{% endfor %}
+			</tr>
+		</tbody>
+	</table>
+	3-
+	<table class="table-bordered" border="3" align="center">
+		<thead>
+			<tr>
+				<th>Titre</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for list in lists %}
+				<tr>
+					<td>{{ list['Titre']|upper }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	4-
+	<br>
+	le nombre des formations =
+	{{ lists|length }}
+	<br>
+	<br>
+	<br>
+	5-
+	<br>
+	{% for list in lists %}
+		{% if list.Description == 'formation theorique' %}
+			{{list.Titre}}
+			<br>
+		{% endif %}
+		{# 2éme methode
+				        {% for list in lists %}
+				            {% if list['Description'] is same as('formation theorique') %}
+				                {{ list['Titre']}}
+				                <br>
+				            {% endif %}
+				        {% endfor %}
+				     #}
+	{% endfor %}
+	<br>
+	6-
+	<br>
+	la formation ayant le plus grand nombre de formations :
+	{% set max=0 %}
+	{% for list in lists %}
+		{% if list.nb_participants>max %}
+			{# max(list.nb_participants,max) #}
+			{% set max=list.nb_participants %}
+		{% endif %}
+	{% endfor %}
+	{% for list in lists %}
+		{% if list.nb_participants==max %}
+			{{list.Titre}}
+		{% endif %}
+	{% endfor %}
+	<br>
+	9-10/
+	<table class="table" border="3" align="center">
+		<thead>
+			<tr>
+				<th>ref</th>
+				<th>Titre</th>
+				<th>Description</th>
+				<th>date_debut</th>
+				<th>date_fin</th>
+				<th>nb_participants</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				{% for list in lists %}
+					<tr>
+						{% if list.nb_participants==0%}
+							{% for l in list %}
+								<td>
+									{{ l }}
+								</td>
+							{% endfor %}
+							<td>
+								{# add bootstrap in base.html.twig class="button"(option) #}
+								<a href="{{ path('app_clubName',{nom : list['Titre']}) }}" class="btn btn-primary">
+									Participer
+								</a>
+							</td>
+						{% endif %}
+					</tr>
+				{% endfor %}
+			</tr>
+		</tbody>
+	</table>
+
+
+{% endblock %}

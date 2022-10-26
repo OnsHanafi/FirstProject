@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clus
+{% endblock %}
+
+{% block body %}
+	<style>
+		div {
+			text-align: center;
+		}
+	</style>
+
+	<div class="example-wrapper">
+		<h1>Clubs ESPRIT</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Ref</th>
+					<th>createdAt</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					{% for club in clubs %}
+						<td>{{club.id}}</td>
+						<td>{{club.ref}}</td>
+						<td>{{club.createdAt.format('d/m/y')}}</td>
+					{% endfor %}
+				</tr>
+			</tbody>
+		</table>
+		{# <p>Au sein d'Esprit, les associations et clubs remlissent plusieurs roles étant donné la fiversité des motivations qui animent ceux qui en sont a l'origine. Conscients de l'importance de la vie associative, les étudiants jouent un role important dans l'élaboration et la transmission des messages aux destinataires. Ci-dessous la liste des clubs d'Esprit. N'hésiter pas a la compléter.</p>
+																																<div>
+																																	<img src="https://esprit-tn.com/esponline/Contents/Img/ens.jpg" width="800px" height="600" class="center" alt="esprit">
+																																</div>
+																															</div> #}
+	{% endblock %}

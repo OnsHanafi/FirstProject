@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List
+{% endblock %}
+
+{% block body %}
+	2-
+	<table class="table" border="3" align="center">
+		<thead>
+			<tr>
+				<th>ref</th>
+				<th>Titre</th>
+				<th>Description</th>
+				<th>date_debut</th>
+				<th>date_fin</th>
+				<th>nb_participants</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				{% for list in lists %}
+					<tr>
+						{% for l in list %}
+							<td>
+								{{ l }}
+							</td>
+						{% endfor %}
+					</tr>
+				{% endfor %}
+			</tr>
+		</tbody>
+	</table>
+	3-
+	<table class="table-bordered" border="3" align="center">
+		<thead>
+			<tr>
+				<th>Titre</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for list in lists %}
+				<tr>
+					<td>{{ list['Titre']|upper }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	4-
+	<br>
+	le nombre des formations =
+	{{ lists|length }}
+	<br>
+	<br>
+	<br>
+	5-
+	<br>
+	{% for list in lists %}
+		{% if list['Description'] is same as('formation theorique') %}
+			{{ list['Titre']}}
+			<br>
+		{% endif %}
+	{% endfor %}
+	<br>
+	<br>
+	<br>
+
+	6-
+	<br>
+	{% set nbp = 0 %}
+	{% for list in lists %}
+		{% if list['nb_participants'] > nbp %}
+			{% set nbp = list['nb_participants'] %}
+		{% endif %}
+	{% endfor %}
+	{% for list in lists %}
+		{% if list['nb_participants'] == nbp %}
+			{{ list['Titre']}}
+		{% endif %}
+	{% endfor %}
+	<br>
+	<br>
+	<br>
+	7-
+	<br>
+	{% set nbp = 0 %}
+	{% for list in lists %}
+		{% set nbp = (nbp+list['nb_participants']) %}
+	{% endfor %}
+	{{ nbp }}
+	<br>
+	<br>
+	<br>
+	8-
+	<br>
+	{% if lists is empty %}
+		il n'y a plus de formations
+		{%else%}
+		il y a des formations
+	{% endif %}
+	<br>
+	<br>
+	<br>
+	9-
+	<br>
+	{% for list in lists %}
+		{% if list['nb_participants'] == 0 %}
+			{% for l in list %}
+				{{ l }}
+				<html>
+					&emsp;</html>
+			{% endfor %}
+			<a href="{{ path('app_clubName',{nom : list['Titre']}) }}" class="btn btn-primary">
+				Participer
+			</a>
+
+		{% endif %}
+	{% endfor %}
+
+{% endblock %}

@@ -1,39 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Clus
+{% block title %}Clubs
 {% endblock %}
 
 {% block body %}
-	<style>
-		div {
-			text-align: center;
-		}
-	</style>
+	{# <style>
+																										div {
+																											text-align: center;
+																										}
+																									</style> #}
 
 	<div class="example-wrapper">
 		<h1>Clubs ESPRIT</h1>
-		<table>
+		<table border='1'>
 			<thead>
 				<tr>
 					<th>Id</th>
 					<th>Ref</th>
 					<th>createdAt</th>
+					<th>Options</th>
 
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					{% for club in clubs %}
+				{% for club in clubs %}
+					<tr>
+
 						<td>{{club.id}}</td>
 						<td>{{club.ref}}</td>
 						<td>{{club.createdAt.format('d/m/y')}}</td>
+						<td>
+							<a href={{"path('app_club_edit', {'id': club.id)}"}}>edit club</a>
+						</td>
 					{% endfor %}
 				</tr>
 			</tbody>
+
 		</table>
+
+		<a href={{path('app_club_new')}}>add club</a>
 		{# <p>Au sein d'Esprit, les associations et clubs remlissent plusieurs roles étant donné la fiversité des motivations qui animent ceux qui en sont a l'origine. Conscients de l'importance de la vie associative, les étudiants jouent un role important dans l'élaboration et la transmission des messages aux destinataires. Ci-dessous la liste des clubs d'Esprit. N'hésiter pas a la compléter.</p>
-																																<div>
-																																	<img src="https://esprit-tn.com/esponline/Contents/Img/ens.jpg" width="800px" height="600" class="center" alt="esprit">
-																																</div>
-																															</div> #}
+																																																																																		<div>
+																																																																																			<img src="https://esprit-tn.com/esponline/Contents/Img/ens.jpg" width="800px" height="600" class="center" alt="esprit">
+																																																																																		</div>
+																																																																																	</div> #}
 	{% endblock %}

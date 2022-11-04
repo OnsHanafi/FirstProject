@@ -67,6 +67,14 @@ class StudentRepository extends ServiceEntityRepository
         return $queryBuilder;
     }
 
+    // public function showAllStudent($email)
+    // {
+    //     $entityManager = $this->getEntityManager($email);
+    //     $query = $entityManager->createQuery('SELECT s FROM App\Entity\Student WHERE s.Email LIKE $email');
+
+    //     return $query->getResult();
+    // }
+
 
 
 

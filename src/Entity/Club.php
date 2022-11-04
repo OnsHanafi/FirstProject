@@ -19,11 +19,13 @@ class Club
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $REF = null;
+
     #[ORM\ManyToMany(targetEntity: Student::class, mappedBy: 'club')]
     private Collection $students;
 
-    #[ORM\Column(length: 255)]
-    private ?string $REF = null;
+
 
     public function __construct()
     {

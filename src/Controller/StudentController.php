@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 #[Route('/student')]
 class StudentController extends AbstractController
 {
@@ -21,38 +22,43 @@ class StudentController extends AbstractController
             'students' => $studentRepository->findAll(),
         ]);
     }
+
+
     /////Trier
     #[Route('/trier', name: 'app_student_trier', methods: ['GET'])]
     public function trier(StudentRepository $studentRepository): Response
     {
-        $student = $studentRepository->trierStudentByEmailDQL;
+        $student = $studentRepository->trierStudentByEmailDQL();
         return $this->render('student/index.html.twig', [
             'students' => $student,
+
         ]);
     }
 
     /////Search
-    // #[Route('/search', name: 'app_student_search')]
-    // public function searchStudent(StudentRepository $studentRepository, Request $request): Response
-    // {
+    #[Route('/search', name: 'app_student_search')]
+    public function searchStudent(StudentRepository $studentRepository, Request $request): Response
+    {
 
-    //     $form = $this->createForm(SearchType::class);
-    //     $form->handleRequest($request);
+        $form = $this->createForm(SearchType::class);
+        $form->handleRequest($request);
 
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $students = $this->studentRepository->showAllStudent($form['email']->getData());
+        if ($form->isSubmitted() && $form->isValid()) {
 
-    //         return $this->render('student/search.html.twig', [
-    //             'students' => $students,
-    //         ]);
-    //     }
+            $students = $studentRepository->showAllStudent($form['email']->getData());
 
-    //     return $this->render('student/search.html.twig', [
-    //         'studentForm' => $form->createView(),
-    //         'students' => $students,
+            return $this->renderForm('student/index.html.twig', [
 
-    //     ]);
-    // }
+                'students' => $students,
+            ]);
+        }
+
+        return $this->render('student/search.html.twig', [
+            'form' => $form->createView(),
+
+
+        ]);
+    }
 
 
 

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Classroom;
+use App\Entity\Club;
 use App\Entity\Student;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -20,7 +21,10 @@ class StudentType extends AbstractType
                 'class' => Classroom::class,
                 'choice_label' => 'name'
             ]);
-        // ->add('clubs');
+        // ->add('club', EntityType::class, [
+        //     'class' => Club::class,
+        //     'choice_label' => 'REF'
+        // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

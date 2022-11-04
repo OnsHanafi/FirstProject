@@ -14,7 +14,7 @@ class ClubType extends AbstractType
         $builder
             ->add('createdAt')
             ->add('REF')
-            // ->add('students')
+            ->add('students')
         ;
     }
 

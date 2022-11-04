@@ -14,6 +14,7 @@
 				<th>NSC</th>
 				<th>Email</th>
 				<th>Classroom</th>
+				{# <th>Clubs</th> #}
 				<th>actions</th>
 			</tr>
 		</thead>
@@ -24,6 +25,12 @@
 					<td>{{ student.NSC }}</td>
 					<td>{{ student.Email }}</td>
 					<td>{{ student.classroom.name }}</td>
+					{# <td>
+																{% for club in student.getClub() %}
+																	{{club.REF}}
+																	|
+																{% endfor %}
+															</td> #}
 
 					<td>
 						<a href="{{ path('app_student_edit', {'id': student.id}) }}">modifier</a>
@@ -40,4 +47,6 @@
 </br>
 
 <a href="{{ path('app_student_trier') }}">Trier</a>
+</br>
+<a href="{{ path('app_student_search') }}">Search</a>
 {% endblock %}
